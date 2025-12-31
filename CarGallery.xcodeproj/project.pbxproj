@@ -6,8 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		338626C02F0557EA00532816 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626BF2F0557EA00532816 /* HomeVC.swift */; };
+		338626C32F0557EA00532816 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338626C12F0557EA00532816 /* Main.storyboard */; };
+		338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */; };
+		338626C82F0557EB00532816 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338626C72F0557EB00532816 /* Assets.xcassets */; };
+		338626D52F05580B00532816 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 338626D42F05580B00532816 /* SDWebImage */; };
+		338626D72F05580B00532816 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 338626D62F05580B00532816 /* SDWebImageMapKit */; };
+		338626DD2F05593B00532816 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626DC2F05593B00532816 /* Car.swift */; };
+		338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626DE2F055CBE00532816 /* CarDetailVC.swift */; };
+		338626E12F055CC800532816 /* FavsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626E02F055CC800532816 /* FavsVC.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		338626B82F0557EA00532816 /* CarGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		338626BF2F0557EA00532816 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		338626C22F0557EA00532816 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		338626C52F0557EA00532816 /* CarGallery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarGallery.xcdatamodel; sourceTree = "<group>"; };
+		338626C72F0557EB00532816 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		338626DC2F05593B00532816 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		338626DE2F055CBE00532816 /* CarDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailVC.swift; sourceTree = "<group>"; };
+		338626E02F055CC800532816 /* FavsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				338626D72F05580B00532816 /* SDWebImageMapKit in Frameworks */,
+				338626D52F05580B00532816 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +66,9 @@
 		338626AF2F0557EA00532816 = {
 			isa = PBXGroup;
 			children = (
+				338626DA2F05586C00532816 /* Controller */,
+				338626D92F05586700532816 /* View */,
+				338626D82F05585E00532816 /* Model */,
 				338626BA2F0557EA00532816 /* CarGallery */,
 				338626B92F0557EA00532816 /* Products */,
 			);
@@ -56,6 +80,34 @@
 				338626B82F0557EA00532816 /* CarGallery.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		338626D82F05585E00532816 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */,
+				338626DC2F05593B00532816 /* Car.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		338626D92F05586700532816 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				338626C12F0557EA00532816 /* Main.storyboard */,
+				338626C72F0557EB00532816 /* Assets.xcassets */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		338626DA2F05586C00532816 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				338626BF2F0557EA00532816 /* HomeVC.swift */,
+				338626DE2F055CBE00532816 /* CarDetailVC.swift */,
+				338626E02F055CC800532816 /* FavsVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +130,8 @@
 			);
 			name = CarGallery;
 			packageProductDependencies = (
+				338626D42F05580B00532816 /* SDWebImage */,
+				338626D62F05580B00532816 /* SDWebImageMapKit */,
 			);
 			productName = CarGallery;
 			productReference = 338626B82F0557EA00532816 /* CarGallery.app */;
@@ -107,6 +161,9 @@
 			);
 			mainGroup = 338626AF2F0557EA00532816;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				338626D32F05580B00532816 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 338626B92F0557EA00532816 /* Products */;
 			projectDirPath = "";
@@ -122,6 +179,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				338626C82F0557EB00532816 /* Assets.xcassets in Resources */,
+				338626C32F0557EA00532816 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +191,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				338626E12F055CC800532816 /* FavsVC.swift in Sources */,
+				338626C02F0557EA00532816 /* HomeVC.swift in Sources */,
+				338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */,
+				338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */,
+				338626DD2F05593B00532816 /* Car.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		338626C12F0557EA00532816 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				338626C22F0557EA00532816 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		338626CF2F0557EB00532816 /* Debug */ = {
@@ -341,6 +416,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		338626D32F05580B00532816 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		338626D42F05580B00532816 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 338626D32F05580B00532816 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		338626D62F05580B00532816 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 338626D32F05580B00532816 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				338626C52F0557EA00532816 /* CarGallery.xcdatamodel */,
+			);
+			currentVersion = 338626C52F0557EA00532816 /* CarGallery.xcdatamodel */;
+			path = CarGallery.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 338626B02F0557EA00532816 /* Project object */;
 }
