@@ -6,83 +6,66 @@
 //
 
 import UIKit
-import SDWebImage // Resimleri yüklemek için bunu eklemeyi unutma!
+import SDWebImage
 
 class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    // Tasarımdaki TableView'ı buraya bağlayacağız
     @IBOutlet weak var tableView: UITableView!
-    
     var carList: [Car] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TableView ayarları
         tableView.delegate = self
         tableView.dataSource = self
         
-        // Verileri çekmeye başla
+        // Arka planı hafif gri yaparak kartları ön plana çıkarıyoruz
+        tableView.backgroundColor = .systemGray6
         fetchData()
     }
     
-    // --- İNTERNETTEN VERİ ÇEKME KISMI ---
     func fetchData() {
         let urlString = "https://gist.githubusercontent.com/ygthnozyrt/5d899ac741fca87cc82c211322981aa9/raw/8c3a82ffdc3dd5bf87927dc373a3073e92c5ae8e/cars.json"
-        
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Hata: \(error.localizedDescription)")
-                return
-            }
+            if let error = error { return }
             guard let data = data else { return }
-            
             do {
                 let incomingCars = try JSONDecoder().decode([Car].self, from: data)
                 self.carList = incomingCars
-                
-                // Veri geldi, tabloyu yenile (Ana iş parçacığında yapılmalı)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            } catch {
-                print("Hata: \(error.localizedDescription)")
-            }
+            } catch { print(error) }
         }.resume()
     }
 
-    // --- TABLEVIEW AYARLARI (Custom Cell Dosyası Olmadan) ---
-    
-    // 1. Kaç araba var?
+    // MARK: - TableView Methods
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return carList.count
     }
     
-    // 2. Her satırda ne gösterilecek?
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // Storyboard'daki 'CarCell' isimli hücreyi çağır
         let cell = tableView.dequeueReusableCell(withIdentifier: "CarCell", for: indexPath)
-        
         let car = carList[indexPath.row]
         
-        // --- TAG YÖNTEMİ ---
-        // 1 numara: Resim
-        if let imageView = cell.viewWithTag(1) as? UIImageView {
-            // İlk resim linkini alıp gösteriyoruz
-            if let imageUrl = car.images.first {
-                imageView.sd_setImage(with: URL(string: imageUrl))
-            }
+        // Tag 1: Araba Görseli
+        if let imageView = cell.viewWithTag(1) as? UIImageView, let url = car.images.first {
+            imageView.sd_setImage(with: URL(string: url))
         }
         
-        // 2 numara: Marka Model
+        // Tag 2: Marka (Üst Label)
         if let brandLabel = cell.viewWithTag(2) as? UILabel {
-            brandLabel.text = "\(car.brand) \(car.model)"
+            brandLabel.text = car.brand
         }
         
-        // 3 numara: Fiyat
+        // Tag 4: Model (Orta Label)
+        if let modelLabel = cell.viewWithTag(4) as? UILabel {
+            modelLabel.text = car.model
+        }
+        
+        // Tag 3: Fiyat (Alt Label)
         if let priceLabel = cell.viewWithTag(3) as? UILabel {
             priceLabel.text = "\(car.price) TL"
         }
@@ -90,8 +73,25 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // Satır yüksekliği (İstersen değiştirebilirsin)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120 // Tasarımına göre ayarla
+        return 140
+    }
+
+    // MARK: - Navigation
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // İSTEDİĞİN ÇÖZÜM: Seçili kalan gri rengi anında temizler
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedCar = carList[indexPath.row]
+        performSegue(withIdentifier: "toDetail", sender: selectedCar)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetail",
+           let dest = segue.destination as? CarDetailVC,
+           let car = sender as? Car {
+            dest.selectedCar = car
+        }
     }
 }
