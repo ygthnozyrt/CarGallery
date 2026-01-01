@@ -16,6 +16,9 @@
 		338626DD2F05593B00532816 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626DC2F05593B00532816 /* Car.swift */; };
 		338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626DE2F055CBE00532816 /* CarDetailVC.swift */; };
 		338626E12F055CC800532816 /* FavsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626E02F055CC800532816 /* FavsVC.swift */; };
+		80B4C37D2F06984B0060147D /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B4C37C2F06984B0060147D /* SplashVC.swift */; };
+		80B4C37F2F069CAC0060147D /* car_intro_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 80B4C37E2F069CAC0060147D /* car_intro_sound.mp3 */; };
+		80B4C3812F069D130060147D /* car-horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 80B4C3802F069D130060147D /* car-horn.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		338626DC2F05593B00532816 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		338626DE2F055CBE00532816 /* CarDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailVC.swift; sourceTree = "<group>"; };
 		338626E02F055CC800532816 /* FavsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavsVC.swift; sourceTree = "<group>"; };
+		80B4C37C2F06984B0060147D /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		80B4C37E2F069CAC0060147D /* car_intro_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = car_intro_sound.mp3; sourceTree = "<group>"; };
+		80B4C3802F069D130060147D /* car-horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "car-horn.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -95,7 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				338626C12F0557EA00532816 /* Main.storyboard */,
+				80B4C37E2F069CAC0060147D /* car_intro_sound.mp3 */,
 				338626C72F0557EB00532816 /* Assets.xcassets */,
+				80B4C3802F069D130060147D /* car-horn.mp3 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -106,6 +114,7 @@
 				338626BF2F0557EA00532816 /* HomeVC.swift */,
 				338626DE2F055CBE00532816 /* CarDetailVC.swift */,
 				338626E02F055CC800532816 /* FavsVC.swift */,
+				80B4C37C2F06984B0060147D /* SplashVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -180,6 +189,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				338626C82F0557EB00532816 /* Assets.xcassets in Resources */,
+				80B4C37F2F069CAC0060147D /* car_intro_sound.mp3 in Resources */,
+				80B4C3812F069D130060147D /* car-horn.mp3 in Resources */,
 				338626C32F0557EA00532816 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +205,7 @@
 				338626E12F055CC800532816 /* FavsVC.swift in Sources */,
 				338626C02F0557EA00532816 /* HomeVC.swift in Sources */,
 				338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */,
+				80B4C37D2F06984B0060147D /* SplashVC.swift in Sources */,
 				338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */,
 				338626DD2F05593B00532816 /* Car.swift in Sources */,
 			);
