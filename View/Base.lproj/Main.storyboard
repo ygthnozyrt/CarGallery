@@ -207,6 +207,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Engine Sound">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="19"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="engineSoundTapped:" destination="nCw-YF-McJ" eventType="touchUpInside" id="yUH-Jb-1d3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sFU-BY-Vrt"/>
@@ -237,7 +240,7 @@
                         <outlet property="brandLabel" destination="hx5-I9-kRK" id="XcF-HV-8Rp"/>
                         <outlet property="colorLabel" destination="lh5-19-OX9" id="Dqi-rt-bB5"/>
                         <outlet property="favButton" destination="Qjr-Xz-MNN" id="N4i-8g-yJz"/>
-                        <outlet property="fuelTypeLabel" destination="GVz-eZ-itf" id="9m7-Vg-vbN"/>
+                        <outlet property="fuelLabel" destination="GVz-eZ-itf" id="kLX-lE-OTg"/>
                         <outlet property="modelLabel" destination="KrB-dg-PzG" id="q76-9S-p3M"/>
                         <outlet property="pageControl" destination="nSl-r4-7UJ" id="nDj-GN-T5m"/>
                         <outlet property="priceLabel" destination="ygr-om-ald" id="dr0-bT-hkw"/>
