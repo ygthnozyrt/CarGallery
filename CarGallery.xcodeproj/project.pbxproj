@@ -10,16 +10,12 @@
 		331560CF2F06B152000C6F13 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331560CE2F06B152000C6F13 /* FavoriteManager.swift */; };
 		338626C02F0557EA00532816 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626BF2F0557EA00532816 /* HomeVC.swift */; };
 		338626C32F0557EA00532816 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338626C12F0557EA00532816 /* Main.storyboard */; };
-		338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */; };
-		338626C82F0557EB00532816 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338626C72F0557EB00532816 /* Assets.xcassets */; };
 		338626D52F05580B00532816 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 338626D42F05580B00532816 /* SDWebImage */; };
 		338626D72F05580B00532816 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 338626D62F05580B00532816 /* SDWebImageMapKit */; };
 		338626DD2F05593B00532816 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626DC2F05593B00532816 /* Car.swift */; };
 		338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626DE2F055CBE00532816 /* CarDetailVC.swift */; };
 		338626E12F055CC800532816 /* FavsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626E02F055CC800532816 /* FavsVC.swift */; };
 		80B4C37D2F06984B0060147D /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B4C37C2F06984B0060147D /* SplashVC.swift */; };
-		80B4C37F2F069CAC0060147D /* car_intro_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 80B4C37E2F069CAC0060147D /* car_intro_sound.mp3 */; };
-		80B4C3812F069D130060147D /* car-horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 80B4C3802F069D130060147D /* car-horn.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,14 +23,10 @@
 		338626B82F0557EA00532816 /* CarGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		338626BF2F0557EA00532816 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		338626C22F0557EA00532816 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		338626C52F0557EA00532816 /* CarGallery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarGallery.xcdatamodel; sourceTree = "<group>"; };
-		338626C72F0557EB00532816 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		338626DC2F05593B00532816 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		338626DE2F055CBE00532816 /* CarDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailVC.swift; sourceTree = "<group>"; };
 		338626E02F055CC800532816 /* FavsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavsVC.swift; sourceTree = "<group>"; };
 		80B4C37C2F06984B0060147D /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
-		80B4C37E2F069CAC0060147D /* car_intro_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = car_intro_sound.mp3; sourceTree = "<group>"; };
-		80B4C3802F069D130060147D /* car-horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "car-horn.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,7 +85,6 @@
 		338626D82F05585E00532816 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */,
 				338626DC2F05593B00532816 /* Car.swift */,
 				331560CE2F06B152000C6F13 /* FavoriteManager.swift */,
 			);
@@ -104,9 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				338626C12F0557EA00532816 /* Main.storyboard */,
-				80B4C37E2F069CAC0060147D /* car_intro_sound.mp3 */,
-				338626C72F0557EB00532816 /* Assets.xcassets */,
-				80B4C3802F069D130060147D /* car-horn.mp3 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,9 +179,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				338626C82F0557EB00532816 /* Assets.xcassets in Resources */,
-				80B4C37F2F069CAC0060147D /* car_intro_sound.mp3 in Resources */,
-				80B4C3812F069D130060147D /* car-horn.mp3 in Resources */,
 				338626C32F0557EA00532816 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,7 +192,6 @@
 			files = (
 				338626E12F055CC800532816 /* FavsVC.swift in Sources */,
 				338626C02F0557EA00532816 /* HomeVC.swift in Sources */,
-				338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */,
 				331560CF2F06B152000C6F13 /* FavoriteManager.swift in Sources */,
 				80B4C37D2F06984B0060147D /* SplashVC.swift in Sources */,
 				338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */,
@@ -456,19 +440,6 @@
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				338626C52F0557EA00532816 /* CarGallery.xcdatamodel */,
-			);
-			currentVersion = 338626C52F0557EA00532816 /* CarGallery.xcdatamodel */;
-			path = CarGallery.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 338626B02F0557EA00532816 /* Project object */;
 }

@@ -12,7 +12,6 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
-    // Tasarım Renkleri (HomeVC ile uyumlu)
     let brandColor = UIColor(hex: "#910029")
     let darkTextColor = UIColor(hex: "#39404B")
     let bgColor = UIColor(hex: "#ECF4F7")
@@ -24,7 +23,6 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Verileri her açılışta Core Data'dan tazeleyerek çekiyoruz
         tableView.reloadData()
         checkEmptyState()
     }
@@ -39,18 +37,13 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func checkEmptyState() {
-        // Core Data'daki güncel favori sayısını kontrol et
-        let favCount = FavoriteManager.shared.getAllFavorites().count
-        
-        if favCount == 0 {
-            let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-            
-            let imageIcon = UIImageView()
-            imageIcon.image = UIImage(systemName: "star.bubble")
+        let favorites = FavoriteManager.shared.getAllFavorites()
+        if favorites.isEmpty {
+            let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+            let imageIcon = UIImageView(image: UIImage(systemName: "star.bubble"))
             imageIcon.tintColor = brandColor.withAlphaComponent(0.3)
             imageIcon.contentMode = .scaleAspectFit
             imageIcon.translatesAutoresizingMaskIntoConstraints = false
-            
             let messageLabel = UILabel()
             messageLabel.text = "You Don't Have any Favorites.\nAdd Your Favorite Cars Now!"
             messageLabel.textColor = darkTextColor.withAlphaComponent(0.6)
@@ -58,82 +51,62 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             messageLabel.textAlignment = .center
             messageLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
-            
             emptyView.addSubview(imageIcon)
             emptyView.addSubview(messageLabel)
-            
             NSLayoutConstraint.activate([
                 imageIcon.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
                 imageIcon.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -40),
                 imageIcon.widthAnchor.constraint(equalToConstant: 80),
                 imageIcon.heightAnchor.constraint(equalToConstant: 80),
-                
                 messageLabel.topAnchor.constraint(equalTo: imageIcon.bottomAnchor, constant: 20),
                 messageLabel.leadingAnchor.constraint(equalTo: emptyView.leadingAnchor, constant: 40),
                 messageLabel.trailingAnchor.constraint(equalTo: emptyView.trailingAnchor, constant: -40)
             ])
-            
             tableView.backgroundView = emptyView
         } else {
             tableView.backgroundView = nil
         }
     }
 
-    // MARK: - TableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FavoriteManager.shared.getAllFavorites().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CarCell", for: indexPath)
-        
-        // Core Data nesnesini al
         let car = FavoriteManager.shared.getAllFavorites()[indexPath.row]
 
         cell.backgroundColor = .clear
-                let verticalPadding: CGFloat = 8
-                    let horizontalPadding: CGFloat = 16
-                    
-                    cell.contentView.frame = cell.bounds.insetBy(dx: horizontalPadding, dy: verticalPadding)
-                    
-                    // 3. Gölgenin kesilmemesi için bu satır kritik!
-                    cell.contentView.layer.masksToBounds = false
-                    cell.clipsToBounds = false
+        let cv = cell.contentView
+        cv.layer.cornerRadius = 16
+        cv.layer.shadowColor = UIColor.black.cgColor
+        cv.layer.shadowOffset = CGSize(width: 0, height: 4)
+        cv.layer.shadowRadius = 6
+        cv.layer.shadowOpacity = 0.1
+        cv.layer.masksToBounds = false
 
-                // --- KART TASARIMI (Beyaz kart, hafif gölge) ---
-                let cv = cell.contentView
-                cv.layer.cornerRadius = 16
-                cv.layer.shadowColor = UIColor.black.cgColor
-                cv.layer.shadowOffset = CGSize(width: 0, height: 4)
-                cv.layer.shadowRadius = 6
-                cv.layer.shadowOpacity = 0.1
-                cv.layer.masksToBounds = false
-
-        // --- İÇERİK ATAMALARI (Tag bazlı) ---
-
-        // 1. Görsel (Tag 1)
         if let imageView = cell.viewWithTag(1) as? UIImageView {
-            imageView.sd_setImage(with: URL(string: car.image ?? ""))
+            if let imageData = car.image?.data(using: .utf8),
+               let images = try? JSONDecoder().decode([String].self, from: imageData) {
+                imageView.sd_setImage(with: URL(string: images.first ?? ""))
+            }
             imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = 12
             imageView.clipsToBounds = true
         }
 
-        // 2. Marka (Tag 2)
         if let brandLabel = cell.viewWithTag(2) as? UILabel {
             brandLabel.text = car.brand?.uppercased()
             brandLabel.font = UIFont.systemFont(ofSize: 11, weight: .semibold)
             brandLabel.textColor = brandColor.withAlphaComponent(0.6)
         }
 
-        // 3. Fiyat (Tag 3)
         if let priceLabel = cell.viewWithTag(3) as? UILabel {
             priceLabel.text = Int(car.price).formatAsCurrency()
             priceLabel.textColor = brandColor
             priceLabel.font = .systemFont(ofSize: 15, weight: .bold)
         }
 
-        // 4. Model (Tag 4)
         if let modelLabel = cell.viewWithTag(4) as? UILabel {
             modelLabel.text = car.model
             modelLabel.textColor = darkTextColor
@@ -153,23 +126,24 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.contentView.frame = cell.bounds.insetBy(dx: horizontalPadding, dy: verticalPadding)
     }
     
-    // MARK: - Navigation (Favoriden Detaya Gitme)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let selectedFav = FavoriteManager.shared.getAllFavorites()[indexPath.row]
         
-        let favList = FavoriteManager.shared.getAllFavorites()
-        let selectedFav = favList[indexPath.row]
+        var imageArray: [String] = []
+        if let imageData = selectedFav.image?.data(using: .utf8) {
+            imageArray = (try? JSONDecoder().decode([String].self, from: imageData)) ?? []
+        }
         
-        // Core Data objesini Car struct'ına çeviriyoruz
         let carToPass = Car(
             id: Int(selectedFav.id),
             brand: selectedFav.brand ?? "",
             model: selectedFav.model ?? "",
             year: Int(selectedFav.year),
-            color: "",
+            color: selectedFav.color ?? "",
             price: Int(selectedFav.price),
             fuelType: selectedFav.fuelType ?? "",
-            images: [selectedFav.image ?? ""]
+            images: imageArray
         )
         
         performSegue(withIdentifier: "toDetailFromFavs", sender: carToPass)
@@ -183,12 +157,10 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    // MARK: - Gestures (Kaydırarak Silme)
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let car = FavoriteManager.shared.getAllFavorites()[indexPath.row]
-            FavoriteManager.shared.remove(Int(car.id)) // Core Data'dan siler
-            
+            FavoriteManager.shared.remove(Int(car.id))
             tableView.deleteRows(at: [indexPath], with: .fade)
             checkEmptyState()
         }

@@ -10,16 +10,11 @@ import CoreData
 
 class FavoriteManager {
     static let shared = FavoriteManager()
-    
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     func getAllFavorites() -> [FavoriteCar] {
         let request: NSFetchRequest<FavoriteCar> = FavoriteCar.fetchRequest()
-        do {
-            return try context.fetch(request)
-        } catch {
-            return []
-        }
+        return (try? context.fetch(request)) ?? []
     }
 
     func add(_ car: Car) {
@@ -27,22 +22,22 @@ class FavoriteManager {
         newFav.id = Int64(car.id)
         newFav.brand = car.brand
         newFav.model = car.model
+        newFav.color = car.color
         newFav.price = Int64(car.price)
         newFav.year = Int64(car.year)
         newFav.fuelType = car.fuelType
-        newFav.image = car.images.first
         
+        if let encodedImages = try? JSONEncoder().encode(car.images) {
+            newFav.image = String(data: encodedImages, encoding: .utf8)
+        }
         saveContext()
     }
 
     func remove(_ carID: Int) {
         let request: NSFetchRequest<FavoriteCar> = FavoriteCar.fetchRequest()
         request.predicate = NSPredicate(format: "id == %d", carID)
-        
         if let results = try? context.fetch(request) {
-            for object in results {
-                context.delete(object)
-            }
+            results.forEach { context.delete($0) }
             saveContext()
         }
     }
@@ -50,13 +45,10 @@ class FavoriteManager {
     func isFavorite(_ carID: Int) -> Bool {
         let request: NSFetchRequest<FavoriteCar> = FavoriteCar.fetchRequest()
         request.predicate = NSPredicate(format: "id == %d", carID)
-        let count = try? context.count(for: request)
-        return (count ?? 0) > 0
+        return (try? context.count(for: request)) ?? 0 > 0
     }
 
     private func saveContext() {
-        if context.hasChanges {
-            try? context.save()
-        }
+        if context.hasChanges { try? context.save() }
     }
 }

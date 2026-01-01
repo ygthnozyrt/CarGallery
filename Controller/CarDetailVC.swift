@@ -7,11 +7,10 @@
 
 import UIKit
 import SDWebImage
-import AVFoundation // Ses kuralı için gerekli
+import AVFoundation
 
 class CarDetailVC: UIViewController, UIScrollViewDelegate {
     
-    // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var brandLabel: UILabel!
@@ -22,11 +21,9 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var favButton: UIBarButtonItem!
     
-    // MARK: - Properties
     var selectedCar: Car?
     var player: AVAudioPlayer?
     
-    // Tasarım Renkleri
     let brandColor = UIColor(hex: "#910029")
     let darkTextColor = UIColor(hex: "#39404B")
     let bgColor = UIColor(hex: "#ECF4F7")
@@ -56,7 +53,6 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
-    // MARK: - UI Setup
     func setupUI(car: Car) {
         brandLabel.text = car.brand.uppercased()
         brandLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -70,15 +66,16 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
         modelLabel.lineBreakMode = .byWordWrapping
         
         let detailFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+        
         yearLabel.text = "\(car.year)"
         yearLabel.font = detailFont
         yearLabel.textColor = darkTextColor.withAlphaComponent(0.8)
         
-        colorLabel.text = "\(car.color)"
+        colorLabel.text = car.color.isEmpty ? "N/A" : car.color
         colorLabel.font = detailFont
         colorLabel.textColor = darkTextColor.withAlphaComponent(0.8)
         
-        fuelLabel.text = "\(car.fuelType)"
+        fuelLabel.text = car.fuelType
         fuelLabel.font = detailFont
         fuelLabel.textColor = darkTextColor.withAlphaComponent(0.8)
         
@@ -90,7 +87,6 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
     }
 
     func setupImages(urls: [String]) {
-        // Kaydırma (Gesture) desteği
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.layer.cornerRadius = 20
@@ -115,10 +111,7 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
         }
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(urls.count), height: scrollView.frame.height)
     }
-    
-    // MARK: - Actions
-    
-    // Motor Sesi (Sound kuralı)
+
     @IBAction func engineSoundTapped(_ sender: UIButton) {
         guard let car = selectedCar else { return }
         let soundName = car.fuelType.lowercased()
@@ -129,17 +122,13 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
                 player = try AVAudioPlayer(contentsOf: url)
                 player?.prepareToPlay()
                 player?.play()
-            } catch {
-                print("Ses çalınamadı: \(error)")
-            }
+            } catch { }
         }
     }
 
-    // Favori Yıldız Butonu (Core Data ve Animasyon)
     @IBAction func favButtonTapped(_ sender: UIBarButtonItem) {
         guard let car = selectedCar else { return }
         
-        // FavoriteManager artık Core Data kullanıyor
         if FavoriteManager.shared.isFavorite(car.id) {
             FavoriteManager.shared.remove(car.id)
             favButton.image = UIImage(systemName: "star")
@@ -149,7 +138,6 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
             favButton.image = UIImage(systemName: "star.fill")
             favButton.tintColor = .systemYellow
             
-            // Profesyonel görünüm için POP animasyonu
             let bounce = CAKeyframeAnimation(keyPath: "transform.scale")
             bounce.values = [1.0, 1.4, 0.9, 1.1, 1.0]
             bounce.duration = 0.5
@@ -157,7 +145,6 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    // MARK: - Helper Methods
     func updateFavoriteButton() {
         guard let car = selectedCar else { return }
         if FavoriteManager.shared.isFavorite(car.id) {
