@@ -1,21 +1,23 @@
 import UIKit
 import SDWebImage
+import AVFoundation // SES İÇİN MUTLAKA EKLE
 
-// UIScrollViewDelegate ekledik ki noktalar resimle beraber kaysın
 class CarDetailVC: UIViewController, UIScrollViewDelegate {
-
+    
+    // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
-    
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var colorLabel: UILabel!
-    @IBOutlet weak var fuelTypeLabel: UILabel!
+    @IBOutlet weak var fuelLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var favButton: UIBarButtonItem!
+    @IBOutlet weak var favButton: UIBarButtonItem! // Sağ üstteki yıldız butonu
     
+    // MARK: - Properties
     var selectedCar: Car?
+    var player: AVAudioPlayer? // Ses oynatıcı
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,46 +29,82 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
         }
     }
 
+    // MARK: - UI Setup
     func setupUI(car: Car) {
-        self.navigationItem.title = "\(car.brand) \(car.model)"
+        brandLabel.text = "Brand : \(car.brand)"
+        modelLabel.text = "Model : \(car.model)"
+        yearLabel.text = "Year : \(car.year)"
+        colorLabel.text = "Color : \(car.color)"
+        fuelLabel.text = "Fuel Type : \(car.fuelType)"
+        priceLabel.text = "\(car.price)"
         
-        brandLabel.text = car.brand
-        modelLabel.text = car.model
-        yearLabel.text = String(car.year)
-        colorLabel.text = car.color
-        fuelTypeLabel.text = car.fuelType
-        priceLabel.text = "\(car.price) TL"
-        
-        pageControl.numberOfPages = car.images.count
+        // Başlığı araba ismi yapalım
+        self.title = "\(car.brand) \(car.model)"
     }
 
     func setupImages(urls: [String]) {
-        scrollView.subviews.forEach { $0.removeFromSuperview() }
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        pageControl.numberOfPages = urls.count
         
-        let width = view.frame.width
-        let height = scrollView.frame.height
-        
-        for i in 0..<urls.count {
-            let iv = UIImageView(frame: CGRect(x: CGFloat(i) * width, y: 0, width: width, height: height))
-            iv.sd_setImage(with: URL(string: urls[i]))
-            iv.contentMode = .scaleAspectFill
-            iv.clipsToBounds = true
-            scrollView.addSubview(iv)
+        for (index, urlString) in urls.enumerated() {
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            
+            if let url = URL(string: urlString) {
+                imageView.sd_setImage(with: url)
+            }
+            
+            let xPosition = self.view.frame.width * CGFloat(index)
+            imageView.frame = CGRect(x: xPosition, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+            
+            scrollView.contentSize.width = scrollView.frame.width * CGFloat(index + 1)
+            scrollView.addSubview(imageView)
         }
-        scrollView.contentSize = CGSize(width: width * CGFloat(urls.count), height: height)
+    }
+
+    // MARK: - Actions
+    
+    @IBAction func engineSoundTapped(_ sender: UIButton) {
+        guard let car = selectedCar else { return }
+        
+        let soundName = car.fuelType.lowercased()
+        
+        if let path = Bundle.main.path(forResource: soundName, ofType: "mp3") {
+            let url = URL(fileURLWithPath: path)
+            do {
+                player = try AVAudioPlayer(contentsOf: url)
+                player?.prepareToPlay() // Oynatmadan önce hazırla
+                player?.play()
+                print("BAŞARILI: \(soundName) çalıyor.")
+            } catch {
+                print("HATA: Ses dosyası oluşturulamadı: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    // 2. Favori Yıldız Butonu (Animasyonlu)
+    @IBAction func favButtonTapped(_ sender: UIBarButtonItem) {
+        if favButton.image == UIImage(systemName: "star") {
+            favButton.image = UIImage(systemName: "star.fill")
+            favButton.tintColor = .systemYellow
+            
+            // POP ANİMASYONU: Butonun zıplamasını sağlar
+            let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+            bounceAnimation.values = [1.0, 1.4, 0.9, 1.1, 1.0]
+            bounceAnimation.duration = 0.5
+            navigationController?.navigationBar.layer.add(bounceAnimation, forKey: nil)
+            
+        } else {
+            favButton.image = UIImage(systemName: "star")
+            favButton.tintColor = .systemBlue
+        }
     }
     
-    // Noktaları kaydıran sihirli fonksiyon
+    // MARK: - ScrollView Methods
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x / view.frame.width)
         pageControl.currentPage = Int(pageIndex)
-    }
-
-    @IBAction func favButtonTapped(_ sender: UIBarButtonItem) {
-        if favButton.image == UIImage(systemName: "star") {
-                favButton.image = UIImage(systemName: "star.fill")
-            } else {
-                favButton.image = UIImage(systemName: "star")
-            }
     }
 }
