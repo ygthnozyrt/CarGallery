@@ -91,11 +91,20 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CarCell", for: indexPath)
         let car = carList[indexPath.row]
+
+        let verticalPadding: CGFloat = 8
+        let horizontalPadding: CGFloat = 16
+        cell.contentView.frame = cell.bounds.insetBy(dx: horizontalPadding, dy: verticalPadding)
+        cell.contentView.layer.masksToBounds = false
+        cell.clipsToBounds = false
         
+        let brandColor = UIColor(hex: "#910029")
+        let darkTextColor = UIColor(hex: "#39404B")
+        let bgColor = UIColor(hex: "#ECF4F7")
         cell.backgroundColor = .clear
         
         let cv = cell.contentView
-        cv.backgroundColor = .white
+        cv.backgroundColor = bgColor
         cv.layer.cornerRadius = 16
         cv.layer.shadowColor = UIColor.black.cgColor
         cv.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -139,11 +148,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 140
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let verticalPadding: CGFloat = 8
-        let horizontalPadding: CGFloat = 12
-        cell.contentView.frame = cell.bounds.insetBy(dx: horizontalPadding, dy: verticalPadding)
-    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
