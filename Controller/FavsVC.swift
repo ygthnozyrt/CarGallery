@@ -91,17 +91,23 @@ class FavsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let car = FavoriteManager.shared.getAllFavorites()[indexPath.row]
 
         cell.backgroundColor = .clear
-        cell.selectionStyle = .none
+                let verticalPadding: CGFloat = 8
+                    let horizontalPadding: CGFloat = 16
+                    
+                    cell.contentView.frame = cell.bounds.insetBy(dx: horizontalPadding, dy: verticalPadding)
+                    
+                    // 3. Gölgenin kesilmemesi için bu satır kritik!
+                    cell.contentView.layer.masksToBounds = false
+                    cell.clipsToBounds = false
 
-        // --- KART TASARIMI ---
-        let cv = cell.contentView
-        cv.backgroundColor = .white
-        cv.layer.cornerRadius = 16
-        cv.layer.shadowColor = UIColor.black.cgColor
-        cv.layer.shadowOffset = CGSize(width: 0, height: 4)
-        cv.layer.shadowRadius = 6
-        cv.layer.shadowOpacity = 0.1
-        cv.layer.masksToBounds = false
+                // --- KART TASARIMI (Beyaz kart, hafif gölge) ---
+                let cv = cell.contentView
+                cv.layer.cornerRadius = 16
+                cv.layer.shadowColor = UIColor.black.cgColor
+                cv.layer.shadowOffset = CGSize(width: 0, height: 4)
+                cv.layer.shadowRadius = 6
+                cv.layer.shadowOpacity = 0.1
+                cv.layer.masksToBounds = false
 
         // --- İÇERİK ATAMALARI (Tag bazlı) ---
 
