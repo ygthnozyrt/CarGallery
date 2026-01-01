@@ -49,7 +49,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CarCell", for: indexPath)
         let car = carList[indexPath.row]
-        
+        tableView.backgroundColor = .clear
         // Tag 1: Araba Görseli
         if let imageView = cell.viewWithTag(1) as? UIImageView, let url = car.images.first {
             imageView.sd_setImage(with: URL(string: url))
@@ -82,7 +82,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // İSTEDİĞİN ÇÖZÜM: Seçili kalan gri rengi anında temizler
         tableView.deselectRow(at: indexPath, animated: true)
-        
         let selectedCar = carList[indexPath.row]
         performSegue(withIdentifier: "toDetail", sender: selectedCar)
     }
