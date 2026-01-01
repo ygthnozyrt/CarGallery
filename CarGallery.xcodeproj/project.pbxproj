@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331560CF2F06B152000C6F13 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331560CE2F06B152000C6F13 /* FavoriteManager.swift */; };
 		338626C02F0557EA00532816 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338626BF2F0557EA00532816 /* HomeVC.swift */; };
 		338626C32F0557EA00532816 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338626C12F0557EA00532816 /* Main.storyboard */; };
 		338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331560CE2F06B152000C6F13 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
 		338626B82F0557EA00532816 /* CarGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		338626BF2F0557EA00532816 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		338626C22F0557EA00532816 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				338626C42F0557EA00532816 /* CarGallery.xcdatamodeld */,
 				338626DC2F05593B00532816 /* Car.swift */,
+				331560CE2F06B152000C6F13 /* FavoriteManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				338626E12F055CC800532816 /* FavsVC.swift in Sources */,
 				338626C02F0557EA00532816 /* HomeVC.swift in Sources */,
 				338626C62F0557EA00532816 /* CarGallery.xcdatamodeld in Sources */,
+				331560CF2F06B152000C6F13 /* FavoriteManager.swift in Sources */,
 				80B4C37D2F06984B0060147D /* SplashVC.swift in Sources */,
 				338626DF2F055CBE00532816 /* CarDetailVC.swift in Sources */,
 				338626DD2F05593B00532816 /* Car.swift in Sources */,

@@ -348,6 +348,7 @@
                     <navigationItem key="navigationItem" id="A3M-5Q-tfA"/>
                     <connections>
                         <outlet property="tableView" destination="xDO-U4-dWS" id="KkO-0e-hLT"/>
+                        <segue destination="nCw-YF-McJ" kind="show" identifier="toDetailFromFavs" id="bJQ-1i-qmb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epV-Rj-EZz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -392,6 +393,9 @@
             <point key="canvasLocation" x="136.64122137404578" y="81.690140845070431"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bJQ-1i-qmb"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="speaker.wave.2.fill" catalog="system" width="128" height="88"/>
