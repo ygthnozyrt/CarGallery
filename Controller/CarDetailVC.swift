@@ -62,18 +62,20 @@ class CarDetailVC: UIViewController, UIScrollViewDelegate {
         modelLabel.text = car.model
         modelLabel.font = UIFont.systemFont(ofSize: 28, weight: .heavy)
         modelLabel.textColor = darkTextColor
+        modelLabel.numberOfLines = 2
+        modelLabel.lineBreakMode = .byWordWrapping
         
         // Detaylar (Yıl, Renk, Yakıt): Daha temiz bir görünüm
         let detailFont = UIFont.systemFont(ofSize: 16, weight: .medium)
-        yearLabel.text = "Year: \(car.year)"
+        yearLabel.text = "\(car.year)"
         yearLabel.font = detailFont
         yearLabel.textColor = darkTextColor.withAlphaComponent(0.8)
         
-        colorLabel.text = "Color: \(car.color)"
+        colorLabel.text = "\(car.color)"
         colorLabel.font = detailFont
         colorLabel.textColor = darkTextColor.withAlphaComponent(0.8)
         
-        fuelLabel.text = "Fuel: \(car.fuelType)"
+        fuelLabel.text = "\(car.fuelType)"
         fuelLabel.font = detailFont
         fuelLabel.textColor = darkTextColor.withAlphaComponent(0.8)
         
